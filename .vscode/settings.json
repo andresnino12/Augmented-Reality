@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "AR_Andres_nino_3228981.slnx",
+    "dotnet.defaultSolution": "AR_Andres_ni-o_3228981.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
