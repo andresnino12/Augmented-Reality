@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43dd49f9ff8626e4889b56ccbd737a25, type: 3}
-  m_Name: Steve 1
+  m_Name: kratos
   m_EditorClassIdentifier: Assembly-CSharp::ItemScriptTable
-  itemName: Steve
-  ItemDescription: Este es un personaje de minecraft
-  itemPreview: {fileID: 21300000, guid: 31cd3ba4b2d2ad34889597162aba88e1, type: 3}
-  itemObj: {fileID: 6585194506495580921, guid: 1f2c6143032f129428a4f2b6417b01bd, type: 3}
+  itemName: kratos
+  ItemDescription: perosnaje principal de god of war
+  itemPreview: {fileID: 21300000, guid: 17c66d5caab14174cb28893d16287747, type: 3}
+  itemObj: {fileID: 0}

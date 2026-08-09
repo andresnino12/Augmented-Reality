@@ -11,8 +11,19 @@ public class ItemHandle : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemDescriptionText;
 
 
-
     private void Start()
+    {
+        if (scriptTableObject != null)
+        {
+            MostrarDatos();
+        }
+    }
+    public void Setup(ItemScriptTable item)
+    {
+        scriptTableObject = item;
+        MostrarDatos();
+    }
+    private void MostrarDatos()
     {
         previewItemImage.sprite = scriptTableObject.itemPreview;
         itemNameText.text = scriptTableObject.itemName;
