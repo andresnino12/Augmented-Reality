@@ -6,7 +6,8 @@ public class InventoryManager : MonoBehaviour
 {
     [Header("Tarjetas")]
     [SerializeField] private GameObject cardPrefap;
-    [SerializeField] private Transform cardContainer;
+    [SerializeField] private Transform view
+        ;
 
     [Header("lista de items")]
     [SerializeField] private List<ItemScriptTable> items = new List<ItemScriptTable>();
@@ -20,7 +21,7 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (ItemScriptTable item in items)
         {
-            GameObject nuevaTarjeta = Instantiate(cardPrefap, cardContainer);
+            GameObject nuevaTarjeta = Instantiate(cardPrefap,view);
 
             ItemHandle itemHandle = nuevaTarjeta.GetComponent<ItemHandle>();
 

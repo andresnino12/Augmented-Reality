@@ -9,7 +9,7 @@ public class ItemHandle : MonoBehaviour
     [SerializeField] private Image previewItemImage;
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI itemDescriptionText;
-
+    private Button Button;
 
     private void Start()
     {
@@ -17,6 +17,13 @@ public class ItemHandle : MonoBehaviour
         {
             MostrarDatos();
         }
+
+        Button.onClick.AddListener(() => CreateObject());
+    }
+
+    private void Awake()
+    {
+        Button = GetComponent<Button>();
     }
     public void Setup(ItemScriptTable item)
     {
@@ -28,6 +35,11 @@ public class ItemHandle : MonoBehaviour
         previewItemImage.sprite = scriptTableObject.itemPreview;
         itemNameText.text = scriptTableObject.itemName;
         itemDescriptionText.text = scriptTableObject.ItemDescription;
+    }
+
+    private void CreateObject()
+    {
+
     }
 
 }
