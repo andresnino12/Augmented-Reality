@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Jobs;
 
-public class GameManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
     [Header("Tarjetas")]
     [SerializeField] private GameObject cardPrefap;
@@ -27,8 +28,14 @@ public class GameManager : MonoBehaviour
             {
                 itemHandle.Setup(item);
             }
+            else
+            {
+                Debug.Log("La lista de objetos esta vacia sotcio");
+            }
         }
     }
+
 }
+
 
 
