@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -29,9 +30,22 @@ public class ArPlaceCube : MonoBehaviour
         aRRaycastManager.Raycast(touchPosition, rayHits, TrackableType.AllTypes);
         if (rayHits.Count > 0)
         {
+            StartCoroutine(WaitPlace());
             Vector3 spawnPosition = rayHits[0].pose.position;
             Quaternion spawnRotation = rayHits[0].pose.rotation;
             Instantiate(aRRaycastManager.raycastPrefab, spawnPosition, spawnRotation);
+            //StopCoroutine(WaitPlace());
+            //StopAllCoroutines();
         }
+    }
+
+
+    // creamos una corrutina: la corrutina es para que se ejecute al mismo tiempo que el codigo sin detenerce
+    IEnumerator WaitPlace()
+    {
+        isPlacing = true;
+        yield return new WaitForSeconds(1f);
+        isPlacing = false;
+
     }
 }
