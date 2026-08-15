@@ -1,38 +1,33 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
-using Unity.Jobs;
-
+using UnityEngine.UIElements;
 public class InventoryManager : MonoBehaviour
 {
-    [Header("Tarjetas")]
     [SerializeField] private GameObject cardPrefap;
-    [SerializeField] private Transform view
-        ;
-
-    [Header("lista de items")]
+    [SerializeField] private Transform spawnCards;  
     [SerializeField] private List<ItemScriptTable> items = new List<ItemScriptTable>();
 
     private void Start()
     {
-        CrearTarjetas();
+        LoadCards();
     }
 
-    private void CrearTarjetas()
+    private void LoadCards()
     {
-        foreach (ItemScriptTable item in items)
+        if (items.Count != 0)
         {
-            GameObject nuevaTarjeta = Instantiate(cardPrefap,view);
-
-            ItemHandle itemHandle = nuevaTarjeta.GetComponent<ItemHandle>();
-
-            if (itemHandle != null)
+            GameObject cardTemp = null;
+            foreach (ItemScriptTable scriptTable in items)
             {
-                itemHandle.Setup(item);
+                cardTemp = Instantiate(cardPrefap, spawnCards);
+                cardTemp.GetComponent<ItemHandle>().scriptTableObject = scriptTable;
+                cardTemp.GetComponent<ItemHandle>().LoadDates();
             }
-            else
-            {
-                Debug.Log("La lista de objetos esta vacia sotcio");
-            }
+        }
+        else
+        {
+            Debug.LogWarning("aqui no hay nada FUSUNGO");
         }
     }
 

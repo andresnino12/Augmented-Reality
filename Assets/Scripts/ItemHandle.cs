@@ -5,7 +5,7 @@ using TMPro;
 public class ItemHandle : MonoBehaviour
 
 {
-    [SerializeField] private ItemScriptTable scriptTableObject;
+    public ItemScriptTable scriptTableObject;
     [SerializeField] private Image previewItemImage;
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI itemDescriptionText;
@@ -15,7 +15,7 @@ public class ItemHandle : MonoBehaviour
     {
         if (scriptTableObject != null)
         {
-            MostrarDatos();
+            LoadDates();
         }
 
         Button.onClick.AddListener(() => CreateObject());
@@ -28,9 +28,9 @@ public class ItemHandle : MonoBehaviour
     public void Setup(ItemScriptTable item)
     {
         scriptTableObject = item;
-        MostrarDatos();
+        LoadDates();
     }
-    private void MostrarDatos()
+    public void LoadDates()
     {
         previewItemImage.sprite = scriptTableObject.itemPreview;
         itemNameText.text = scriptTableObject.itemName;

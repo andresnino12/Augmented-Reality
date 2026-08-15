@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: marcus
   ItemDescription: personaje del juego gears of war
   itemPreview: {fileID: 21300000, guid: b778690ff8e93044a8bc2f6378d3a0d2, type: 3}
-  itemObj: {fileID: 0}
+  itemObj: {fileID: 919132149155446097, guid: 3df9b963bed68b9469488adceb0e09e0, type: 3}

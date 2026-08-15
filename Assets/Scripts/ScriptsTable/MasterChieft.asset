@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: master Chieft
   ItemDescription: personaje dle juego halo
   itemPreview: {fileID: 21300000, guid: 37b0ccab769acf4469b0051f2a2c22fb, type: 3}
-  itemObj: {fileID: 0}
+  itemObj: {fileID: 919132149155446097, guid: d21a6a850a26139418f6d0c79fe5ffd4, type: 3}
