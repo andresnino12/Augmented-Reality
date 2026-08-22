@@ -19,7 +19,7 @@ public class ItemHandle : MonoBehaviour
         }
 
         Button.onClick.AddListener(() => CreateObject());
-        Button.onClick.AddListener(() => GameManager.instance.EditMenu());
+        //Button.onClick.AddListener(() => GameManager.instance.EditMenu());
     }
 
     private void Awake()

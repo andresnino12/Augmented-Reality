@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public enum GameStates {Defaul, InGame, Pause, Death }
+public enum AppStates {Defaul, InMainMenu, InInventoryMenu, InEditMenu}
 public class GameManager : MonoBehaviour
 
 {
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static event Action OnInventoryMenu;
     public static event Action OnEditMenu;
 
-    public GameStates gameState;
+    public AppStates appStates;
 
     private void Awake()
     {
@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         MainMenu();
-        gameState = GameStates.InGame;
     }
 
     public void CreateObj(GameObject obj)
@@ -60,16 +59,21 @@ public class GameManager : MonoBehaviour
     public void MainMenu ()
     {
         OnMainMenu?.Invoke();
+        appStates = AppStates.InMainMenu;
         Debug.Log($"Se llamo al main menu");
     }
     public void InventoryMenu()
     {
         OnInventoryMenu?.Invoke();
+        appStates = AppStates.InInventoryMenu;
+
         Debug.Log($"Se llamo al Inventory menu");
     }
     public void EditMenu()
     {
         OnEditMenu?.Invoke();
+        appStates = AppStates.InEditMenu;
+
         Debug.Log($"Se llamo al edit menu");
     }
 }

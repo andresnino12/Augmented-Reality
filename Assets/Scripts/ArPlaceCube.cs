@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 public class ArPlaceCube : MonoBehaviour
 {
     [SerializeField] private ARRaycastManager aRRaycastManager;
@@ -11,31 +12,39 @@ public class ArPlaceCube : MonoBehaviour
 
     public void Update()
     {
-        var touchscreen = Touchscreen.current;
-
-        if (touchscreen.touches[0].isInProgress && !isPlacing)
+        if (GameManager.instance.appStates == AppStates.InInventoryMenu)
         {
-            var touch0 = touchscreen.touches[0];
-            if (touch0.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
+            if (EventSystem.current.IsPointerOverGameObject())
             {
-                Vector2 touchPos = touch0.position.ReadValue();
-                PlaceObj(touchPos);
+                Debug.Log("toco en la ui");
+                    return;
+            }
+            var touchscreen = Touchscreen.current;
+
+            if (touchscreen.touches[0].isInProgress && !isPlacing)
+            {
+                var touch0 = touchscreen.touches[0];
+                if (touch0.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
+                {
+                    Vector2 touchPos = touch0.position.ReadValue();
+                    PlaceObj(touchPos);
+                }
             }
         }
+
     }
 
     private void PlaceObj(Vector2 touchPosition)
     {
         var rayHits = new List<ARRaycastHit>();
         aRRaycastManager.Raycast(touchPosition, rayHits, TrackableType.AllTypes);
-        if (rayHits.Count > 0)
+        if (rayHits.Count > 0 && GameManager.instance.currObj != null)
         {
             StartCoroutine(WaitPlace());
             Vector3 spawnPosition = rayHits[0].pose.position;
             Quaternion spawnRotation = rayHits[0].pose.rotation;
             Instantiate(GameManager.instance.currObj, spawnPosition, spawnRotation);
-            //StopCoroutine(WaitPlace());
-            //StopAllCoroutines();
+            GameManager.instance.EditMenu();
         }
     }
 
