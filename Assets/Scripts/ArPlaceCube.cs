@@ -33,7 +33,7 @@ public class ArPlaceCube : MonoBehaviour
             StartCoroutine(WaitPlace());
             Vector3 spawnPosition = rayHits[0].pose.position;
             Quaternion spawnRotation = rayHits[0].pose.rotation;
-            Instantiate(aRRaycastManager.raycastPrefab, spawnPosition, spawnRotation);
+            Instantiate(GameManager.instance.currObj, spawnPosition, spawnRotation);
             //StopCoroutine(WaitPlace());
             //StopAllCoroutines();
         }

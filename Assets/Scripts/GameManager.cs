@@ -1,12 +1,22 @@
+using System;
 using Unity.Mathematics;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
+public enum GameStates {Defaul, InGame, Pause, Death }
 public class GameManager : MonoBehaviour
+
 {
     public static GameManager instance;
-    private GameObject currObj;
+    public GameObject currObj;
+    public static event Action OnMainMenu;
+    public static event Action OnInventoryMenu;
+    public static event Action OnEditMenu;
 
-    public void Awake()
+    public GameStates gameState;
+
+    private void Awake()
     {
         if (instance != null && instance != this)
         {
@@ -17,6 +27,11 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+    }
+    public void Start()
+    {
+        MainMenu();
+        gameState = GameStates.InGame;
     }
 
     public void CreateObj(GameObject obj)
@@ -31,5 +46,30 @@ public class GameManager : MonoBehaviour
     public void DestroyObject(GameObject obj)
     {
         Destroy(obj);
+    }
+
+    public void SelecObjToPlace(GameObject prefab)
+    {
+        currObj = prefab;
+    }
+    public GameObject GetSelectedPrefab()
+        {
+        return currObj;
+        }
+
+    public void MainMenu ()
+    {
+        OnMainMenu?.Invoke();
+        Debug.Log($"Se llamo al main menu");
+    }
+    public void InventoryMenu()
+    {
+        OnInventoryMenu?.Invoke();
+        Debug.Log($"Se llamo al Inventory menu");
+    }
+    public void EditMenu()
+    {
+        OnEditMenu?.Invoke();
+        Debug.Log($"Se llamo al edit menu");
     }
 }

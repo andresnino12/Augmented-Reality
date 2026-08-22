@@ -19,6 +19,7 @@ public class ItemHandle : MonoBehaviour
         }
 
         Button.onClick.AddListener(() => CreateObject());
+        Button.onClick.AddListener(() => GameManager.instance.EditMenu());
     }
 
     private void Awake()
@@ -39,7 +40,7 @@ public class ItemHandle : MonoBehaviour
 
     private void CreateObject()
     {
-
+        GameManager.instance.SelecObjToPlace(scriptTableObject.itemObj);
     }
 
 }
