@@ -40,7 +40,7 @@ public class ItemHandle : MonoBehaviour
 
     private void CreateObject()
     {
-        GameManager.instance.SelecObjToPlace(scriptTableObject.itemObj);
+        GameManager.Instance.SelecObjToPlace(scriptTableObject.itemObj);
     }
 
 }

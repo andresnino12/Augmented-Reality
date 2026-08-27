@@ -8,8 +8,9 @@ public enum AppStates {Defaul, InMainMenu, InInventoryMenu, InEditMenu}
 public class GameManager : MonoBehaviour
 
 {
-    public static GameManager instance;
+    public static GameManager Instance;
     public GameObject currObj;
+    private GameObject selectedObj;
     public static event Action OnMainMenu;
     public static event Action OnInventoryMenu;
     public static event Action OnEditMenu;
@@ -18,14 +19,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
     }
     public void Start()
@@ -40,6 +41,10 @@ public class GameManager : MonoBehaviour
             DestroyObject(currObj);
         }
         currObj = Instantiate(obj, Vector3.zero, quaternion.identity);
+    }
+    public void DestroyObject()
+    {
+        Destroy(currObj);
     }
 
     public void DestroyObject(GameObject obj)

@@ -12,12 +12,12 @@ public class ArPlaceCube : MonoBehaviour
 
     public void Update()
     {
-        if (GameManager.instance.appStates == AppStates.InInventoryMenu)
+        if (GameManager.Instance.appStates == AppStates.InInventoryMenu)
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 Debug.Log("toco en la ui");
-                    return;
+                return;
             }
             var touchscreen = Touchscreen.current;
 
@@ -38,13 +38,13 @@ public class ArPlaceCube : MonoBehaviour
     {
         var rayHits = new List<ARRaycastHit>();
         aRRaycastManager.Raycast(touchPosition, rayHits, TrackableType.AllTypes);
-        if (rayHits.Count > 0 && GameManager.instance.currObj != null)
+        if (rayHits.Count > 0 && GameManager.Instance.currObj != null)
         {
             StartCoroutine(WaitPlace());
             Vector3 spawnPosition = rayHits[0].pose.position;
             Quaternion spawnRotation = rayHits[0].pose.rotation;
-            Instantiate(GameManager.instance.currObj, spawnPosition, spawnRotation);
-            GameManager.instance.EditMenu();
+            GameManager.Instance.currObj = Instantiate(GameManager.Instance.currObj, spawnPosition, spawnRotation);
+            GameManager.Instance.EditMenu();
         }
     }
 
