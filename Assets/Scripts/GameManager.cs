@@ -1,7 +1,7 @@
 using System;
 using Unity.Mathematics;
 using UnityEditor;
-using UnityEditor.SceneManagement;
+
 using UnityEngine;
 
 public enum AppStates {Defaul, InMainMenu, InInventoryMenu, InEditMenu}
