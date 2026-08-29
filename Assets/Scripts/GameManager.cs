@@ -3,8 +3,9 @@ using Unity.Mathematics;
 using UnityEditor;
 
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
 
-public enum AppStates {Defaul, InMainMenu, InInventoryMenu, InEditMenu}
+public enum AppStates { Defaul, InMainMenu, InInventoryMenu, InEditMenu }
 public class GameManager : MonoBehaviour
 
 {
@@ -14,6 +15,10 @@ public class GameManager : MonoBehaviour
     public static event Action OnMainMenu;
     public static event Action OnInventoryMenu;
     public static event Action OnEditMenu;
+    public static event Action OnTakeScreenshot;
+    public static event Action OnEndTakeScreenshot;
+    public ARPlaneManager planeManager;
+
 
     public AppStates appStates;
 
@@ -57,11 +62,11 @@ public class GameManager : MonoBehaviour
         currObj = prefab;
     }
     public GameObject GetSelectedPrefab()
-        {
+    {
         return currObj;
-        }
+    }
 
-    public void MainMenu ()
+    public void MainMenu()
     {
         OnMainMenu?.Invoke();
         appStates = AppStates.InMainMenu;
@@ -81,4 +86,40 @@ public class GameManager : MonoBehaviour
 
         Debug.Log($"Se llamo al edit menu");
     }
+
+    public void TakeScreenshot()
+    {
+        OnTakeScreenshot?.Invoke();
+        HidePLanes();
+    }
+    public void EndTakeScreenshot()
+    {
+        OnEndTakeScreenshot?.Invoke();
+        ShowPlanes();
+    }
+    public void HidePLanes()
+    {
+        var planes = planeManager.trackables;
+
+        foreach (var plane in planes)
+        {
+            plane.gameObject.SetActive(false);
+        }
+    }
+    public void ShowPlanes()
+    {
+        var planes = planeManager.trackables;
+
+        foreach (var plane in planes)
+        {
+            plane.gameObject.SetActive(true);
+        }
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
+        Debug.Log("se salio del juego");
+    }
+
+
 }

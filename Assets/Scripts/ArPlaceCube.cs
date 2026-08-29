@@ -37,7 +37,7 @@ public class ArPlaceCube : MonoBehaviour
     private void PlaceObj(Vector2 touchPosition)
     {
         var rayHits = new List<ARRaycastHit>();
-        aRRaycastManager.Raycast(touchPosition, rayHits, TrackableType.AllTypes);
+        aRRaycastManager.Raycast(touchPosition, rayHits, TrackableType.PlaneWithinPolygon);
         if (rayHits.Count > 0 && GameManager.Instance.currObj != null)
         {
             StartCoroutine(WaitPlace());
