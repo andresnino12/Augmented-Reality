@@ -4,10 +4,9 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuPanel;
-
     [SerializeField] private GameObject inventoryMenuPanel;
-
     [SerializeField] private GameObject editMenuPanel;
+    
 
 
     private void OnEnable()
@@ -15,17 +14,16 @@ public class UIManager : MonoBehaviour
         GameManager.OnMainMenu += OnMainMenuPanel;
         GameManager.OnInventoryMenu += OnInventoryMenuPanel;
         GameManager.OnEditMenu += OnEditMenuPanel;
-        GameManager.OnTakeScreenshot += OnTakeScrinshoot;
-        GameManager.OnEndTakeScreenshot += OnTakeScrinshoot;
-
+        GameManager.OnTakeScreenshot += OnTakeScreenshot;
+        GameManager.OnEndTakeScreenshot += OnMainMenuPanel;
     }
     private void OnDisable()
     {
         GameManager.OnMainMenu -= OnMainMenuPanel;
         GameManager.OnInventoryMenu -= OnInventoryMenuPanel;
         GameManager.OnEditMenu -= OnEditMenuPanel;
-        GameManager.OnTakeScreenshot -= OnTakeScrinshoot;
-        GameManager.OnEndTakeScreenshot -= OnTakeScrinshoot;
+        GameManager.OnTakeScreenshot -= OnTakeScreenshot;
+        GameManager.OnEndTakeScreenshot -= OnMainMenuPanel;
     }
 
     public void OnMainMenuPanel()
@@ -46,11 +44,11 @@ public class UIManager : MonoBehaviour
         inventoryMenuPanel.SetActive(false);
         editMenuPanel.SetActive(true);
     }
-
-    public void OnTakeScrinshoot()
+    private void OnTakeScreenshot()
     {
         mainMenuPanel.SetActive(false);
         inventoryMenuPanel.SetActive(false);
         editMenuPanel.SetActive(false);
     }
+    
 }

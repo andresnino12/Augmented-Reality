@@ -582,6 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   currObj: {fileID: 0}
+  planeManager: {fileID: 1375737370}
   appStates: 0
 --- !u!1 &120262528
 GameObject:
@@ -2187,8 +2188,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 913670207}
-        m_TargetAssemblyTypeName: TakeScreenshotAndShare, Assembly-CSharp
+      - m_Target: {fileID: 116300527}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: TakeScreenshot
         m_Mode: 1
         m_Arguments:

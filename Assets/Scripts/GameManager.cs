@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.IO;
 using Unity.Mathematics;
 using UnityEditor;
 
@@ -87,7 +89,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Se llamo al edit menu");
     }
 
-    public void TakeScreenshot()
+    public void TakeScreenshotUi()
     {
         OnTakeScreenshot?.Invoke();
         HidePLanes();
@@ -119,6 +121,33 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("se salio del juego");
+    }
+    public void TakeScreenshot()
+    {
+        StartCoroutine(Screenshot());
+    }
+    private IEnumerator Screenshot()
+    {
+        GameManager.Instance.TakeScreenshotUi();
+        yield return new WaitForEndOfFrame();
+
+
+        Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        ss.Apply();
+
+        string filePath = Path.Combine(Application.temporaryCachePath, "shared img.png");
+        File.WriteAllBytes(filePath, ss.EncodeToPNG());
+
+        Destroy(ss);
+
+        new NativeShare().AddFile(filePath)
+            .SetSubject("Subject goes here").SetText("Hola esto es una prueba fusunga")
+            .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget))
+            .Share();
+        GameManager.Instance.EndTakeScreenshot();
+
+
     }
 
 

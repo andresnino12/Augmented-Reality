@@ -29,5 +29,6 @@ public class TakeScreenshotAndShare : MonoBehaviour
             .Share();
         GameManager.Instance.EndTakeScreenshot();
 
+
     }
 }
